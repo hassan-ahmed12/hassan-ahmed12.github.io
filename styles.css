@@ -9,3 +9,38 @@
 #ronin .project-visual{background:#11182b}#ronin .project-visual img,#the-dress-outlet .project-visual img,#kos-couture .project-visual img{object-fit:contain}
 #the-dress-outlet .project-visual{background:#b4c8d4}#kos-couture .project-visual{background:#c9bdab}
 #black-jacket-suiting .project-visual img{object-position:center 35%}
+
+/* Quiet motion, with no layout shifts or continuously moving decorations. */
+.text-link { transition: color .25s ease; }
+.text-link:hover { gap: 32px; }
+.text-link span, .button span, .nav-contact span {
+ display: inline-block;
+ transition: transform .3s cubic-bezier(.22, 1, .36, 1);
+}
+.text-link:hover span, .text-link:focus-visible span,
+.button:hover span, .button:focus-visible span,
+.nav-contact:hover span, .nav-contact:focus-visible span { transform: translate(3px, -3px); }
+.filter { transition: background-color .25s ease, color .25s ease, border-color .25s ease; }
+.project-arrow { transition: background-color .25s ease, transform .3s ease; }
+.project-visual:hover .project-arrow, .project-visual:focus-visible .project-arrow {
+ background: var(--green);
+ transform: rotate(6deg);
+}
+.project-visual:focus-visible img { transform: scale(1.035); }
+.contact-circle { transition: transform .4s cubic-bezier(.22, 1, .36, 1); }
+.contact-circle:hover, .contact-circle:focus-visible { transform: rotate(8deg); }
+@media (prefers-reduced-motion: no-preference) {
+ .hero h1 em::after { transform-origin: left center; animation: highlight-in .85s .3s cubic-bezier(.22, 1, .36, 1) backwards; }
+ @keyframes highlight-in {
+  from { transform: rotate(-3deg) scaleX(0); }
+  to { transform: rotate(-3deg) scaleX(1); }
+ }
+}
+@media (prefers-reduced-motion: reduce) {
+ .button:hover, .text-link:hover span, .text-link:focus-visible span,
+ .button:hover span, .button:focus-visible span,
+ .nav-contact:hover span, .nav-contact:focus-visible span,
+ .project-visual:hover img, .project-visual:focus-visible img,
+ .project-visual:hover .project-arrow, .project-visual:focus-visible .project-arrow,
+ .contact-circle:hover, .contact-circle:focus-visible { transform: none; }
+}
